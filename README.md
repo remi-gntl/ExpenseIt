@@ -1,7 +1,8 @@
-# ExpenseIt – Visualiseur de Notes de Frais
+# ✅ ExpenseIt – Visualiseur de Notes de Frais
 
 Une application **WPF** simple et élégante pour consulter les notes de frais des employés par département.  
-Développée en **C#**
+Développée en **C#**.
+
 ---
 
 ## ✨ Fonctionnalités principales
