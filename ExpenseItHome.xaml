@@ -1,0 +1,69 @@
+﻿<Page x:Class="ExpenseIt.ExpenseItHome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="500"
+    Title="ExpenseIt - Home">
+
+    <Grid Margin="10,0,10,10">
+
+        <Grid.Resources>
+            <XmlDataProvider x:Key="ExpenseDataSource" XPath="Expenses">
+                <x:XData>
+                    <Expenses xmlns="">
+                        <Person Name="Rémi" Departement="IT">
+                            <Expense ExpenseType="Ordinateur" ExpenseAmount="540"/>
+                            <Expense ExpenseType="Repas" ExpenseAmount="25"/>
+                        </Person>
+                        <Person Name="Patrice" Departement="IT">
+                            <Expense ExpenseType="Rasberry" ExpenseAmount="90"/>
+                            <Expense ExpenseType="cloud" ExpenseAmount="35"/>
+                        </Person>
+                        <Person Name="André" Departement="IT">
+                            <Expense ExpenseType="Consultant" ExpenseAmount="2"/>
+                            <Expense ExpenseType="Ecran" ExpenseAmount="250"/>
+                        </Person>
+                        <Person Name="Robin" Departement="Logistique">
+                            <Expense ExpenseType="Armoire" ExpenseAmount="700"/>
+                        </Person>
+                    </Expenses>
+                </x:XData>
+            </XmlDataProvider>
+            <DataTemplate x:Key="nameItemTemplate">
+                <Label Content="{Binding XPath=@Name}"/>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="/watermark.png"/>
+        </Grid.Background>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Column="1" Style="{StaticResource headerTextStyle}">
+            Voir la note de frais
+        </Label>
+
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource listHeaderStyle}">
+            <Label Style="{StaticResource listHeaderTextStyle}">Noms</Label>
+        </Border>
+
+        <ListBox Name="peopleListBox" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Source={StaticResource ExpenseDataSource}, XPath=Person}"
+                 ItemTemplate="{StaticResource nameItemTemplate}">
+        </ListBox>
+
+        <Button Grid.Column="1" Grid.Row="3" Click="Button_Click" Style="{StaticResource buttonStyle}">Voir</Button>
+    </Grid>
+</Page>
